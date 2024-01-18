@@ -7,11 +7,11 @@ const Header = () => {
         <section className="flex justify-between items-center h-full">
           <div className="flex flex-col justify-center">
             <h1 className="text-white text-3xl font-bold">
-              Control
+              Bed
               <br />
-              Panel
+              Room
             </h1>
-            <p className="text-white">Lights</p>
+            <p className="text-orange-400">4 Lights</p>
           </div>
 
           <div className="absolute top-0 right-0 p-0">

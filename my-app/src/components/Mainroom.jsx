@@ -4,10 +4,9 @@ const Mainroom = () => {
   return (
     <>
       <Headerrooms />
-
-      <main className="pt-20">
+      <div className="pt-20 pl-8">
         <Categories />
-      </main>
+      </div>
     </>
   );
 };

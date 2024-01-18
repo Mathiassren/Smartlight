@@ -4,9 +4,5 @@ import "./globals.css";
 import Mainroom from "@/components/Mainroom";
 
 export default function Controlpanel() {
-  return (
-    <>
-      <Mainroom />
-    </>
-  );
+  return <></>;
 }

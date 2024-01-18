@@ -16,9 +16,14 @@ module.exports = {
         glow: "0 0 15px 5px rgba(59, 130, 246, 0.5)",
       },
       colors: {
-        "header-blue": "#0A4DA2",
-        "header-light": "#FFFFFF", //Default Categories
-        "dark-blue": "#093B7B", //Catergories Hover
+        "palete-orange": "#FF9B9B",
+        "palete-green": "#94EB9E",
+        "palete-blue": "#94CAEB",
+        "palete-purple": "#A594EB",
+        "palete-dark-purple": "#DE94EB",
+        "palete-yellow": "#EBD094",
+        "header-light": "#FFFFFF",
+        "dark-blue": "#093B7B",
       },
     },
   },
