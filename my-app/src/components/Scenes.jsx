@@ -1,6 +1,22 @@
 import React, { useState } from "react";
 import { FaRegLightbulb } from "react-icons/fa";
 
+const textStyle = {
+  color: "white",
+  fontSize: "18px",
+  backgroundColor: "lightblue",
+  width: "15rem",
+  borderRadius: "1rem",
+  paddingTop: "4px",
+  marginLeft: "auto",
+  marginRight: "auto",
+  display: "block",
+  height: "40px",
+  marginTop: "20px",
+  textAlign: "center",
+  border: "2px solid white",
+};
+
 const SceneButton = ({ label, onClick, color }) => {
   return (
     <button
@@ -41,7 +57,7 @@ export default function Scenes() {
     };
 
     fetch(
-      "http://192.168.8.105/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
       {
         method: "PUT",
         headers: {
@@ -67,7 +83,10 @@ export default function Scenes() {
           />
         ))}
       </div>
-      {selectedScene && <p>Selected Scene: {selectedScene}</p>}
+
+      {selectedScene && (
+        <p style={textStyle}>Selected Scene: {selectedScene}</p>
+      )}
     </div>
   );
 }

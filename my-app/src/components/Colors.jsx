@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 export default function ColorPalette() {
   const colors = [
@@ -18,7 +19,6 @@ export default function ColorPalette() {
     "bg-palete-dark-purple": 60000,
     "bg-palete-yellow": 11000,
   };
-  console.log(colorHueMapping);
 
   const [selectedColor, setSelectedColor] = useState("");
 
@@ -34,7 +34,7 @@ export default function ColorPalette() {
     };
 
     fetch(
-      "http://192.168.8.105/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
       {
         method: "PUT",
         headers: {
@@ -47,22 +47,29 @@ export default function ColorPalette() {
       .then((data) => console.log(data));
   };
 
-  const addColor = () => {};
+  // Animation variants for framer-motion
+  const itemVariants = {
+    hidden: { opacity: 0, x: -10 },
+    visible: { opacity: 1, x: 0 },
+  };
 
   return (
     <div className="flex items-center gap-2">
       {colors.map((color, index) => (
-        <div
-          key={index}
+        <motion.div
+          key={color}
           className={`w-10 h-10 ${color} cursor-pointer rounded-full border-2 ${
             selectedColor === color ? "border-white" : "border-transparent"
-          }  shadow-md`}
+          } shadow-md`}
           onClick={() => handleColorClick(color)}
-        ></div>
+          variants={itemVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: index * 0.1, type: "spring", stiffness: 50 }}
+        />
       ))}
-
       <button
-        onClick={addColor}
+        onClick={() => {}}
         className="w-6 h-6 flex items-center justify-center bg-white rounded-full border-none text-lg text-blue-600"
       >
         +

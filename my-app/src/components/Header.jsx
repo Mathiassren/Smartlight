@@ -12,7 +12,13 @@ const Header = () => {
               Panel
             </h1>
           </div>
-          <Image src="/vector.png" alt="Vector" width={40} height={40} />
+          <Image
+            className="rounded-full border-2"
+            src="/profile.jpg"
+            alt="profile picture"
+            width={50}
+            height={50}
+          />
         </section>
       </main>
     </header>

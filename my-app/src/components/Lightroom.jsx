@@ -9,7 +9,7 @@ const Lightroom = () => {
 
   useEffect(() => {
     fetch(
-      "http://192.168.8.105/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47"
+      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47"
     )
       .then((response) => response.json())
       .then((data) => setIsLightOn(data.state.on))
@@ -18,9 +18,9 @@ const Lightroom = () => {
 
   const toggleLight = () => {
     const newState = !isLightOn;
-
+    console.log(toggleLight);
     fetch(
-      "http://192.168.8.105/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
       {
         method: "PUT",
         headers: {
@@ -42,7 +42,7 @@ const Lightroom = () => {
     <main className="bg-gray-100 shadow-md bg m-auto mt-auto pt-10 z-40 rounded-t-[32px] min-h-screen">
       <Intensity />
       <div
-        className="flex justify-end transistion -mt-[105px]"
+        className="flex justify-end transistion -mt-[170px]"
         onClick={toggleLight}
       >
         <img

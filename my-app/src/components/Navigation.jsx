@@ -1,6 +1,6 @@
 "use client";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { FaRegLightbulb, FaHouseChimneyWindow, FaReact } from "react-icons/fa6";
 import tw from "tailwind-styled-components";
 import Rooms from "./Rooms";
@@ -24,17 +24,17 @@ const StyledNav = tw.nav`
 const Navigation = () => {
   const [popupContent, setPopupContent] = useState(null);
   const [mainContent, setMainContent] = useState("Mainroom");
+  const controls = useAnimation();
 
   const handleIconClick = (popup, main) => {
     setPopupContent(popupContent === popup ? null : popup);
     setMainContent(main);
+    controls.start({ opacity: 1, x: 0 });
   };
 
-  const pageVariants = {
-    initial: { opacity: 0, x: 100 },
-    in: { opacity: 1, x: 0 },
-    out: { opacity: 0, x: 200 },
-  };
+  useEffect(() => {
+    controls.start({ opacity: 0, x: -100 });
+  }, [controls]);
 
   const pageTransition = {
     ease: "easeInOut",
@@ -59,7 +59,7 @@ const Navigation = () => {
         {popupContent === "Lightroom" && (
           <motion.div
             initial={{ y: "100%" }}
-            animate={{ y: "calc(100% - 24rem)" }}
+            animate={{ y: "calc(100% - 29rem)" }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", stiffness: 100 }}
             className="fixed bottom-16 bg-lightroom-color left-0 w-full h-1/2 z-50"
@@ -81,14 +81,13 @@ const Navigation = () => {
         )}
       </AnimatePresence>
 
-      <AnimatePresence wait>
+      <AnimatePresence>
         {mainContent === "Mainroom" && (
           <motion.div
             key="mainroom"
-            variants={pageVariants}
             initial="initial"
-            animate="in"
-            exit="out"
+            animate={controls}
+            exit={{ opacity: 0, x: 100 }}
             transition={pageTransition}
             className="main-content"
           >
@@ -98,10 +97,9 @@ const Navigation = () => {
         {mainContent === "Head" && (
           <motion.div
             key="head"
-            variants={pageVariants}
             initial="initial"
-            animate="in"
-            exit="out"
+            animate={controls}
+            exit={{ opacity: 0, x: 100 }}
             transition={pageTransition}
             className="main-content"
           >

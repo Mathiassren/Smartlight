@@ -14,8 +14,9 @@ const Header = () => {
             <p className="text-orange-400">4 Lights</p>
           </div>
 
-          <div className="absolute top-0 right-0 p-0">
-            <Image src="/Lamp.png" alt="Lamp" width={200} height={200} />
+          <div className="flex flex-col items-center absolute top-0 right-0 pr-8">
+            <Image src="/Lampnobulb.png" alt="Lamp" width={150} height={150} />
+            <div className="border-2 border-red-400 rounded-3xl flex items-center justify-center w-32"></div>
           </div>
         </section>
       </main>
