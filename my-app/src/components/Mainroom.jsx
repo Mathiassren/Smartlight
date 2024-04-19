@@ -4,7 +4,7 @@ const Mainroom = () => {
   return (
     <>
       <Headerrooms />
-      <div className="pt-20 pl-8">
+      <div className="pt-6 pl-2">
         <Categories />
       </div>
     </>

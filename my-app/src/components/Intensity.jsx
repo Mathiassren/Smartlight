@@ -85,7 +85,7 @@ const LightControlPanel = () => {
       bri: brightness,
     };
     fetch(
-      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.1.225/api/3CrPrmCobGPLPiBWZN6MWBHS0b368pRELVPowmRW/lights/9/state",
       {
         method: "PUT",
         headers: {
@@ -101,7 +101,7 @@ const LightControlPanel = () => {
 
   return (
     <div className="mb-14">
-      <h2>Intensity</h2>
+      <h2 className="font-bold">Intensity</h2>
       <BrightnessControl
         initialBrightness={brightness}
         onBrightnessChange={handleBrightnessChange}

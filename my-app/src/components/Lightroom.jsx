@@ -9,7 +9,7 @@ const Lightroom = () => {
 
   useEffect(() => {
     fetch(
-      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47"
+      "http://192.168.1.225/api/3CrPrmCobGPLPiBWZN6MWBHS0b368pRELVPowmRW/lights/9"
     )
       .then((response) => response.json())
       .then((data) => setIsLightOn(data.state.on))
@@ -18,9 +18,8 @@ const Lightroom = () => {
 
   const toggleLight = () => {
     const newState = !isLightOn;
-    console.log(toggleLight);
     fetch(
-      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.1.225/api/3CrPrmCobGPLPiBWZN6MWBHS0b368pRELVPowmRW/lights/9/state",
       {
         method: "PUT",
         headers: {
@@ -42,7 +41,7 @@ const Lightroom = () => {
     <main className="bg-gray-100 shadow-md bg m-auto mt-auto pt-10 z-40 rounded-t-[32px] min-h-screen">
       <Intensity />
       <div
-        className="flex justify-end transistion -mt-[170px]"
+        className="flex justify-end transistion -mt-[190px]"
         onClick={toggleLight}
       >
         <img
@@ -52,7 +51,7 @@ const Lightroom = () => {
       </div>
 
       <section className="pt-5">
-        <h2 className="pt-10 pb-4">Colors</h2>
+        <h2 className="pt-14 pb-4 font-bold">Colors</h2>
         <Colors />
       </section>
       <section className="pt-2">

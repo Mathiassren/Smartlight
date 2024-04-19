@@ -34,7 +34,7 @@ export default function ColorPalette() {
     };
 
     fetch(
-      "http://192.168.8.100/api/RBDJ5SoKISP8jr0iRKwvD8xUbS18QUOA3hvvLC0l/lights/47/state",
+      "http://192.168.1.225/api/3CrPrmCobGPLPiBWZN6MWBHS0b368pRELVPowmRW/lights/9/state",
       {
         method: "PUT",
         headers: {

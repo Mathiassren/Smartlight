@@ -1,12 +1,13 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { motion, useAnimation, AnimatePresence } from "framer-motion";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { FaRegLightbulb, FaHouseChimneyWindow, FaReact } from "react-icons/fa6";
 import tw from "tailwind-styled-components";
-import Rooms from "./Rooms";
+import Rooms from "../../pages/groups/Rooms";
 import Lightroom from "./Lightroom";
 import Mainroom from "./Mainroom";
 import Head from "./Header";
+import Link from "next/link";
 
 const StyledNav = tw.nav`
   fixed 
@@ -21,28 +22,54 @@ const StyledNav = tw.nav`
   dark:bg-white
 `;
 
+// Framer Motion animation variants for the loader
+const dotVariants = {
+  initial: { x: 0, opacity: 0.5 },
+  animate: {
+    x: [0, 20, 0], // Move each dot 20px to the right and back to the original position
+    opacity: [0.5, 1, 0.5], // Change the opacity from 0.5 to 1 and back to 0.5
+    transition: {
+      duration: 1.5, // Duration for one cycle of the animation
+      repeat: Infinity, // Repeat the animation indefinitely
+      repeatType: "loop",
+      ease: "easeInOut",
+    },
+  },
+};
+
+const Loader = () => (
+  <div className="fixed top-0 left-0 right-0 flex justify-center items-center h-16 bg-white bg-opacity-75 z-50">
+    {[...Array(3)].map((_, i) => (
+      <motion.span
+        key={i}
+        className="block w-2 h-2 bg-blue-500 rounded-full mx-1"
+        variants={dotVariants}
+        initial="initial"
+        animate="animate"
+        style={{ animationDelay: `${i * 0.2}s` }} // Stagger the start of each dot's animation
+      />
+    ))}
+  </div>
+);
+
 const Navigation = () => {
   const [popupContent, setPopupContent] = useState(null);
   const [mainContent, setMainContent] = useState("Mainroom");
-  const controls = useAnimation();
+  const [isLoading, setLoading] = useState(false);
 
   const handleIconClick = (popup, main) => {
-    setPopupContent(popupContent === popup ? null : popup);
-    setMainContent(main);
-    controls.start({ opacity: 1, x: 0 });
-  };
-
-  useEffect(() => {
-    controls.start({ opacity: 0, x: -100 });
-  }, [controls]);
-
-  const pageTransition = {
-    ease: "easeInOut",
-    duration: 0.3,
+    setLoading(true);
+    setTimeout(() => {
+      setPopupContent(popupContent === popup ? null : popup);
+      setMainContent(main);
+      setLoading(false);
+    }, 1000); // Simulate loading for 2 seconds
   };
 
   return (
     <>
+      {isLoading && <Loader />}
+
       <StyledNav style={{ zIndex: 60 }}>
         <FaRegLightbulb
           className="text-2xl hover:cursor-pointer"
@@ -52,61 +79,45 @@ const Navigation = () => {
           className="text-2xl hover:cursor-pointer"
           onClick={() => handleIconClick("Rooms", "Head")}
         />
-        <FaReact className="text-2xl hover:cursor-pointer" />
+        <Link href="/settings">
+          <FaReact className="text-2xl hover:cursor-pointer" />
+        </Link>
       </StyledNav>
 
-      <AnimatePresence>
-        {popupContent === "Lightroom" && (
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: "calc(100% - 29rem)" }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", stiffness: 100 }}
-            className="fixed bottom-16 bg-lightroom-color left-0 w-full h-1/2 z-50"
-          >
-            <Lightroom />
-          </motion.div>
-        )}
+      {popupContent === "Lightroom" && (
+        <motion.div
+          initial={{ y: "100%" }}
+          animate={{ y: "calc(100% - 115%)" }}
+          exit={{ y: "100%" }}
+          transition={{ type: "spring", bounce: 0.25, stiffness: 100 }}
+          className="fixed bottom-16 bg-lightroom-color left-0 w-full h-1/2 z-50"
+        >
+          <Lightroom />
+        </motion.div>
+      )}
 
-        {popupContent === "Rooms" && (
-          <motion.div
-            initial={{ y: "100%" }}
-            animate={{ y: "calc(100% - 34rem)" }}
-            exit={{ y: "100%" }}
-            transition={{ type: "spring", stiffness: 100 }}
-            className="fixed bottom-16 bg-header-blue left-0 w-full h-1/2 z-50"
-          >
-            <Rooms />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {popupContent === "Rooms" && (
+        <motion.div
+          initial={{ y: "100%" }}
+          animate={{ y: "calc(100% - 150%)" }}
+          exit={{ y: "100%" }}
+          transition={{ type: "spring", bounce: 0.25, stiffness: 100 }}
+          className="fixed bottom-16 bg-header-blue left-0 w-full h-1/2 z-50"
+        >
+          <Rooms />
+        </motion.div>
+      )}
 
-      <AnimatePresence>
-        {mainContent === "Mainroom" && (
-          <motion.div
-            key="mainroom"
-            initial="initial"
-            animate={controls}
-            exit={{ opacity: 0, x: 100 }}
-            transition={pageTransition}
-            className="main-content"
-          >
-            <Mainroom />
-          </motion.div>
-        )}
-        {mainContent === "Head" && (
-          <motion.div
-            key="head"
-            initial="initial"
-            animate={controls}
-            exit={{ opacity: 0, x: 100 }}
-            transition={pageTransition}
-            className="main-content"
-          >
-            <Head />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {mainContent === "Mainroom" && (
+        <div className="main-content">
+          <Mainroom />
+        </div>
+      )}
+      {mainContent === "Head" && (
+        <div className="main-content">
+          <Head />
+        </div>
+      )}
     </>
   );
 };

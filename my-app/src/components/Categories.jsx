@@ -17,12 +17,24 @@ const CategoryItem = ({ icon, children }) => (
 const Categories = () => {
   return (
     <div className="flex overflow-x-auto whitespace-nowrap py-2 no-scrollbar">
-      <CategoryItem icon={<FaLightbulb />}>Main Light</CategoryItem>
-      <CategoryItem icon={<FaDesktop />}>Desk Lights</CategoryItem>
-      <CategoryItem icon={<FaBed />}>Bed</CategoryItem>
-      <CategoryItem icon={<FaBath />}>Bathroom</CategoryItem>
-      <CategoryItem icon={<FaTree />}>Outdoor</CategoryItem>
-      <CategoryItem icon={<FaChair />}>Balcony</CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaLightbulb />}>
+        Main Light
+      </CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaDesktop />}>
+        Desk Lights
+      </CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaBed />}>
+        Bed
+      </CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaBath />}>
+        Bathroom
+      </CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaTree />}>
+        Outdoor
+      </CategoryItem>
+      <CategoryItem className="curserpointer" icon={<FaChair />}>
+        Balcony
+      </CategoryItem>
     </div>
   );
 };
